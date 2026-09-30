@@ -1,28 +1,58 @@
 import os
 import sys
+
 import tabulate
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from shared.student import GROUP_NAME, STUDENT_NAME, VARIANT_NUMBER
 
 users = {
- "cloud_architect": {"role": "cloud_security", "clearance": 4, "department":
-"Cloud", "active": True},
- "devops_engineer": {"role": "devops", "clearance": 3, "department":
-"DevOps", "active": True},
- "qa_tester": {"role": "quality_assurance", "clearance": 2, "department":
-"QA", "active": True},
- "partner_access": {"role": "partner", "clearance": 2, "department":
-"Partnership", "active": True},
- "migrated_user": {"role": "migrated", "clearance": 1, "department":
-"Migration", "active": False}
+    "cloud_architect": {
+        "role": "cloud_security",
+        "clearance": 4,
+        "department": "Cloud",
+        "active": True,
+    },
+    "devops_engineer": {
+        "role": "devops",
+        "clearance": 3,
+        "department": "DevOps",
+        "active": True,
+    },
+    "qa_tester": {
+        "role": "quality_assurance",
+        "clearance": 2,
+        "department": "QA",
+        "active": True,
+    },
+    "partner_access": {
+        "role": "partner",
+        "clearance": 2,
+        "department": "Partnership",
+        "active": True,
+    },
+    "migrated_user": {
+        "role": "migrated",
+        "clearance": 1,
+        "department": "Migration",
+        "active": False,
+    },
 }
-resources = [("cloud_configs", 4), ("deployment_pipelines", 3),
-("test_environments", 2), ("partner_apis", 2), ("infrastructure_code", 4),
-("shared_resources", 1), ("container_registry", 3), ("secrets_vault", 4),
-("build_artifacts", 2), ("public_endpoints", 1)]
+resources = [
+    ("cloud_configs", 4),
+    ("deployment_pipelines", 3),
+    ("test_environments", 2),
+    ("partner_apis", 2),
+    ("infrastructure_code", 4),
+    ("shared_resources", 1),
+    ("container_registry", 3),
+    ("secrets_vault", 4),
+    ("build_artifacts", 2),
+    ("public_endpoints", 1),
+]
 security_levels = ("Development", "Staging", "Production", "CriticalInfrastructure")
 blocked_users = {"migrated_user", "container_breach", "pipeline_compromise"}
+
 
 def main() -> None:
     print(GROUP_NAME, STUDENT_NAME, VARIANT_NUMBER)
@@ -32,9 +62,9 @@ def main() -> None:
     print(
         tabulate.tabulate(
             t1_resourses,
-            headers = ["Ресурс", "Рівень Безпеки"],
-            showindex = range(1, len(t1_resourses) + 1),
-            tablefmt = "grid",
+            headers=["Ресурс", "Рівень Безпеки"],
+            showindex=range(1, len(t1_resourses) + 1),
+            tablefmt="grid",
         )
     )
     results = []
@@ -55,6 +85,7 @@ def main() -> None:
             results.append((u, r[0], status))
     for user, resource, status in results:
         print(f"user={user} resource={resource} -> {status}")
-        
+
+
 if __name__ == "__main__":
     main()
