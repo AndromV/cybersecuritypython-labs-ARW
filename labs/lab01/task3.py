@@ -3,7 +3,7 @@ import hashlib
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import wraps
 
 import tabulate
@@ -23,7 +23,7 @@ users_to_register = (
     ("UwU", "_26*6yha"),
     ("GitCraft", "10992737"),
 )
-salt = "0000"+ f"{VARIANT_NUMBER}"
+salt = "0000" + f"{VARIANT_NUMBER}"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 filepath = os.path.join(BASE_DIR, "data", "users.csv")
 log_path = os.path.join(BASE_DIR, "data", "log.json")
@@ -41,7 +41,7 @@ def log_event(func):
         username = args[0] if args else "Unknown"
         status = "SUCCESS" if result else "FAILED"
         log_dic = {
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
             "event": func.__name__,
             "username": username,
             "status": status,
@@ -111,11 +111,10 @@ def create_users(users_list, salt: str):
                 writer.writerow([login, sha_password])
     except PermissionError:
         print(f"[Помилка] Немає дозволу на запис у файл '{filepath}'.")
-    except (FileNotFoundError):
-        print(f"[Помилка] Файл не знайдено або не існує")
-    except(IsADirectoryError):
+    except FileNotFoundError:
+        print("[Помилка] Файл не знайдено або не існує")
+    except IsADirectoryError:
         print(f"[Помилка] Шлях '{filepath}' є каталогом")
-
 
 
 def read_users():
@@ -137,10 +136,7 @@ def login(username: str, password: str) -> bool:
         if username == None or password == None:
             raise ValueError
         check_hash = generate_hash(password, salt)
-        if (username, check_hash) in reading_users:
-            return True
-        else:
-            return False
+        return (username, check_hash) in reading_users
     except ValidationError:
         print(
             f"Вхід користувача {username} відхилено: пароль не містить допустиму кількість символів"
