@@ -30,7 +30,7 @@ cybersecurity-python-labs/
 │       ├── __init__.py
 │       ├── main.py         # Єдина точка входу: підкоманди demo та analyze
 │       ├── task1.py        # Завдання 1: ООП-модель (User, Admin, Session, AuditLog, UserAccount)
-│       ├── task2.py        # Завдання 2: CLI-утиліта аудиту HTTP-заголовків (Варіант 9)
+│       ├── task2.py        # Завдання 2: CLI-утиліта аудиту HTTP-заголовків
 │       ├── README.md       # Поточна інструкція користувача
 │       └── data/
 │           ├── data_v09/

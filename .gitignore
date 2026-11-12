@@ -109,7 +109,7 @@ ipython_config.py
 # poetry.toml
 
 # pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#   According to pypa/pipenv#598, it is recommended to include pdm.lock in version control.
 #   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
 #   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
 # pdm.lock
@@ -217,7 +217,13 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-#Data
-labs/**/data/
+# Data (ігнорування таблиць та сторонніх JSON)
 *.csv
 *.json
+!labs/lab03/data/seed.json
+
+# Лабораторна робота №3: SQLite база даних та службові файли транзакцій
+labs/lab03/data/*.sqlite3
+labs/lab03/data/*.sqlite3-*
+labs/lab03/data/*.db
+labs/lab03/data/*.db-*
