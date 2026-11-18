@@ -14,7 +14,6 @@ router = APIRouter()
     summary="Список категорій",
 )
 def get_categories_endpoint() -> list[dict]:
-    """Отримати список усіх категорій за зростанням id."""
     return repository.get_categories()
 
 

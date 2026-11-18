@@ -4,7 +4,6 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class CategoryCreate(BaseModel):
-
     model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
 
     name: str = Field(
@@ -16,12 +15,10 @@ class CategoryCreate(BaseModel):
 
 
 class CategoryRead(CategoryCreate):
-
     id: int = Field(..., gt=0, description="Унікальний ідентифікатор категорії")
 
 
 class RecordCreate(BaseModel):
-
     model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
 
     code: str = Field(
@@ -58,13 +55,11 @@ class RecordReplace(RecordCreate):
 
 
 class RecordRead(RecordCreate):
-
     id: int = Field(..., gt=0, description="Унікальний ідентифікатор запису")
     category_name: str = Field(..., description="Назва категорії, отримана через JOIN")
 
 
 class StudentRead(BaseModel):
-
     student_name: str
     group_name: str
     variant_number: int

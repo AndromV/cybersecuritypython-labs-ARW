@@ -17,7 +17,6 @@ logger = logging.getLogger("seed")
 
 
 def seed_database() -> None:
-    """Виконати первинне заповнення бази навчальними даними."""
     initialize_database()
 
     if not SEED_DATA_PATH.exists():

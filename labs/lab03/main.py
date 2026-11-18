@@ -1,5 +1,3 @@
-"""Точка входу FastAPI-застосунку для Варіанта 9."""
-
 import logging
 from contextlib import asynccontextmanager
 
@@ -20,7 +18,6 @@ logger = logging.getLogger("lab03")
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    """Життєвий цикл сервісу: автоматичне створення структури таблиць під час старту."""
     logger.info("Перевірка та ініціалізація структури бази SQLite...")
     initialize_database()
     logger.info("Базу даних успішно ініціалізовано.")
@@ -44,7 +41,6 @@ app.include_router(records.router, prefix="/records", tags=["Записи"])
 
 @app.get("/ping", tags=["Системні"], summary="Перевірка доступності сервісу")
 def ping() -> dict[str, str]:
-    """Перевірка працездатності Web API."""
     return {"status": "ok"}
 
 
@@ -55,7 +51,6 @@ def ping() -> dict[str, str]:
     summary="Відомості про автора роботи",
 )
 def get_student() -> StudentRead:
-    """Отримати дані студента з shared/student.py."""
     return StudentRead(
         student_name=STUDENT_NAME,
         group_name=GROUP_NAME,
